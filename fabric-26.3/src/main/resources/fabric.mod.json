@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "threatengl",
+  "version": "${version}",
+  "name": "ThreatenGL",
+  "description": "Threatens Minecraft to use a different version of OpenGL.",
+  "authors": [
+    {
+      "name": "Richy Z.",
+      "contact": {
+        "homepage": "https://richy.lol"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/threatengl",
+    "sources": "https://github.com/Richy-Z/ThreatenGL",
+    "issues": "https://github.com/Richy-Z/ThreatenGL/issues",
+    "discord": "https://discord.gg/eYEDsnKh2T"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "threatengl-icon-notext-128.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "lol.richy.threatengl.fabric.ThreatenGLFabric"
+    ],
+    "client": [
+      "lol.richy.threatengl.fabric.client.ThreatenGLFabricClient"
+    ]
+  },
+  "mixins": [
+    "threatengl-26.3.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25"
+  }
+}

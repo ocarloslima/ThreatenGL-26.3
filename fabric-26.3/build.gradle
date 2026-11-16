@@ -1,0 +1,67 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'maven-publish'
+}
+
+group = project.maven_group
+version = project.mod_version
+base.archivesName = "threatengl-fabric-${minecraft_version}"
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../common/src/main/java', '../fabric/src/main/java']
+            exclude 'lol/richy/threatengl/mixin/ThreatenGLMixin.java'
+        }
+        resources {
+            srcDirs = ['src/main/resources', '../common/src/main/resources']
+            exclude 'threatengl.mixins.json'
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'withoutThreatenGL', project.hasProperty('withoutThreatenGL')
+
+    if (project.hasProperty('withoutThreatenGL')) {
+        exclude 'fabric.mod.json'
+        exclude 'threatengl-26.3.mixins.json'
+    }
+
+    filesMatching('fabric.mod.json') {
+        expand version: project.version
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+}
+
+jar {
+    from('../COPYING.LESSER') {
+        into 'META-INF/licenses'
+        rename { 'COPYING.LESSER' }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = base.archivesName.get()
+            from components.java
+        }
+    }
+}

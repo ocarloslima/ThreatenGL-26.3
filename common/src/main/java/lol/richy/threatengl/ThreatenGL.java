@@ -2,7 +2,6 @@ package lol.richy.threatengl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.glfw.GLFW;
 
 public final class ThreatenGL {
     public static final String MOD_ID = "threatengl";
@@ -14,7 +13,6 @@ public final class ThreatenGL {
         LOGGER.info("Hark! This watermelon mod doth seem to toil as expected! O, dear sire, rejoice! How tremendous!");
 
         LOGGER.info("ThreatenGL will threaten Minecraft soon...");
-        LOGGER.info("Using GLFW Version {}, not to be confused with OpenGL version.", GLFW.glfwGetVersionString());
     }
 
     public static void warnServer() {
